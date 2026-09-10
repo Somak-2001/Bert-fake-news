@@ -529,6 +529,55 @@ print("Predicted probabilities:", probs)
 
 ---
 
+## Hugging Face Deployment
+
+The fine-tuned BERT sequence classifier has been published as a public model on the Hugging Face Hub for reproducible inference. The uploaded checkpoint is the actual trained model evaluated in this project, allowing users to run inference directly without needing local model files or manual weight downloads.
+
+- **Hugging Face Model Repository:** [somakpoddar01/bert-fake-news-fakeddit](https://huggingface.co/somakpoddar01/bert-fake-news-fakeddit)
+
+| Property | Details |
+| :--- | :--- |
+| **Platform** | Hugging Face Hub |
+| **Model ID** | `somakpoddar01/bert-fake-news-fakeddit` |
+| **Architecture** | BERT for Sequence Classification |
+| **Base Checkpoint** | `bert-base-uncased` |
+| **Task** | Binary Fake News Classification |
+| **Repository Visibility** | Public |
+| **Uploaded Files** | `config.json`, `model.safetensors`, `tokenizer.json`, `tokenizer_config.json` |
+
+### Load the Deployed Model
+
+Both the tokenizer and fine-tuned model can be loaded directly from the Hugging Face Hub:
+
+```python
+from transformers import BertTokenizer, BertForSequenceClassification
+import torch
+
+# Load directly from the public Hugging Face repository
+tokenizer = BertTokenizer.from_pretrained(
+    "somakpoddar01/bert-fake-news-fakeddit"
+)
+model = BertForSequenceClassification.from_pretrained(
+    "somakpoddar01/bert-fake-news-fakeddit"
+)
+
+# Example inference
+text = "Scientists have discovered a new species of deep-sea fish."
+inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=128)
+
+model.eval()
+with torch.no_grad():
+    outputs = model(**inputs)
+    probs = torch.softmax(outputs.logits, dim=-1)
+
+print("Predicted probabilities (0=Non-Fake, 1=Fake):", probs)
+```
+
+> [!NOTE]
+> No local model files are required when loading the model from the public Hugging Face repository. The `transformers` library handles downloading and caching the model weights automatically.
+
+---
+
 ## References
 
 1. **Attention Is All You Need:** Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., & Polosukhin, I. (2017). *Advances in Neural Information Processing Systems (NeurIPS 2017)*. [arXiv:1706.03762](https://arxiv.org/abs/1706.03762).
