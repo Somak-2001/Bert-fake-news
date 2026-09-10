@@ -6,10 +6,13 @@
 [![Captum](https://img.shields.io/badge/Captum-Model%20Interpretability-orange.svg)](https://captum.ai/)
 [![Test Accuracy](https://img.shields.io/badge/Test%20Accuracy-79.10%25-brightgreen.svg)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![🤗 Hugging Face Model](https://img.shields.io/badge/🤗%20Hugging%20Face-View%20Model-yellow)](https://huggingface.co/somakpoddar01/bert-fake-news-fakeddit)
+
 
 **Course:** NLP CS60075 — Assignment 3 (Spring 2026)  
 **Institution:** Indian Institute of Technology Kharagpur (IIT KGP)  
 **Author / Repository:** [Somak-2001/Bert-fake-news](https://github.com/Somak-2001/Bert-fake-news)
+
 
 ---
 
